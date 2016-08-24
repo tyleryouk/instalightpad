@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Parse
+import Bolts
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +19,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // [Optional] Power your app with Local Datastore. For more info, go to
+       /* Parse.enableLocalDatastore()
+        
+        // Initialize Parse.
+        Parse.setApplicationId("omuMPDFX8OU2EaxQmy6ty5mBo4QNmz4GhQDGnT1g",
+            clientKey: "AI79ifZe3FoGMxtnPiAUDHW0qyAKU9SqgIVBE5na")*/
+        
+        let parseConfig = ParseClientConfiguration { (ParseMutableClientConfiguration) in
+            
+            //accessing Heroku App via id & keys
+            ParseMutableClientConfiguration.applicationId = "instalightpad1097324961293"
+            ParseMutableClientConfiguration.clientKey = "instalightpad6969696969696969"
+            ParseMutableClientConfiguration.server = "http://instalightpad.herokuapp.com/parse"
+        }
+        
+        Parse.initializeWithConfiguration(parseConfig)
+        
+        // [Optional] Track statistics around application opens.
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        // call login function
+        login()
+        
+        // color of window
+        window?.backgroundColor = .whiteColor()
+        
         return true
     }
 
@@ -39,6 +69,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func login() {
+        
+        // remember user's login
+        let username : String? = NSUserDefaults.standardUserDefaults().stringForKey("username")
+        
+        // if loged in
+        if username != nil {
+            
+            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let myTabBar = storyboard.instantiateViewControllerWithIdentifier("tabBar") as! UITabBarController
+            window?.rootViewController = myTabBar
+        }
+        
     }
 
 
