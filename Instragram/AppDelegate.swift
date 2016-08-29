@@ -1,10 +1,4 @@
-//
-//  AppDelegate.swift
-//  Instragram
-//
-//  Created by Ahmad Idigov on 07.12.15.
-//  Copyright © 2015 Akhmed Idigov. All rights reserved.
-//
+
 
 import UIKit
 import Parse
